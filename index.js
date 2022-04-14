@@ -1,7 +1,11 @@
 const express = require('express');
+const multer = require('multer');
+const { Router } = express;
 
 const app = express();
+const router = Router();
 const PORT = 8080;
+
 
 const server = app.listen(PORT, () => {
     console.log("Aplicacion express escuchando en puerto 8080");
@@ -9,7 +13,13 @@ const server = app.listen(PORT, () => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
+app.use('/api', router);
+app.use(express.static('public'));
+app.use('/static', express.static(__dirname + '/public'));
 
+app.get('/', function (req, res) {
+    res.senfile(__dirname + '/public/index.html');
+})
 
 //GET
 app.get('/', (req, resp) => {
@@ -18,7 +28,6 @@ app.get('/', (req, resp) => {
 
 app.get('/api/productos', (req, resp) => {
     let productos = [{nombre:'heladera', precio:100, id:5}, {nombre:'heladera2', precio:200, id:6}];
-    //contenedor --> getById(req.params.id)
 
     if(Object.entries(req.query).length > 0) {
         resp.json({
@@ -36,8 +45,6 @@ app.get('/api/productos', (req, resp) => {
 
       app.get('/api/productos/:id', (req, resp) => {
         let productos = [{nombre:'heladera', precio:100, id:5}, {nombre:'heladera2', precio:200, id:6}];
-        //contenedor --> getById(req.params.id)
-    
             resp.json({
             result: 'geat product by id',
             producto: productos[req.params.id],
@@ -48,18 +55,15 @@ app.get('/api/productos', (req, resp) => {
 
       //POST (no tiene id)
       app.post('/api/productos', (req, resp) => {
-          //logica let NewProduct = req.body
         resp.json({
             result: 'Save product',
             body: req.body
         });
     })
 
-
     //PUT
       app.put('/api/productos/:id', (req, resp) => {
-        //let productos = [{nombre:'heladera', precio:100}, {nombre:'heladera2', precio:200}];
-        //logica
+        let productos = [{nombre:'heladera', precio:100}, {nombre:'heladera2', precio:200}];
             resp.json({
             result: 'edit by id',
             id: req.params.id,
@@ -69,14 +73,12 @@ app.get('/api/productos', (req, resp) => {
 
            //DELETE
     app.delete('/api/productos/:id', (req, resp) => {
-        //let productos = [{nombre:'heladera', precio:100}, {nombre:'heladera2', precio:200}];
-        //logica
+        let productos = [{nombre:'heladera', precio:100}, {nombre:'heladera2', precio:200}];
             resp.json({
             result: 'edit by id',
             id: req.params.id,
         });
     })
-
 
          //EJERCICIO DE PRACTICA
       const frase = 'Hola mi nombre es Tomas Payer'
@@ -88,3 +90,4 @@ app.get('/api/productos', (req, resp) => {
           })
       })
 
+      
