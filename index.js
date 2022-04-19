@@ -53,8 +53,9 @@ app.get('/api/productos', (req, resp) => {
     })
     
 
-      //POST (no tiene id)
+      //POST 
       app.post('/api/productos', (req, resp) => {
+          let productos = {"result":"edit by id","id":"1","body":{"title":"Heladera","price":130,"thumbnail":"url"}}
         resp.json({
             result: 'Save product',
             body: req.body
