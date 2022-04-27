@@ -1,10 +1,11 @@
 {
   "name": "coderhouse-backend-3",
   "version": "1.0.0",
-  "description": "",
+  "description": "Websockets\r - Comprender la diferencia entre HTTP y Websocket.\r - Integrar Websocket a nuestro proyecto de Express.\r - Generar la inicialización sobre el cliente para conectarse al servidor mediante Websocket\r -------------------------------------------------------------------\r Websockets\r - Understand the difference between HTTP and Websocket.\r - Integrate Websocket into our Express project.\r - Generate initialization on client to connect to server via Websocket",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
