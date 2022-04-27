@@ -6,25 +6,24 @@ const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
-let mensajes = [];
-
 app.use(express.static('./public'));
 
-app.get('/', (req, res) => {
-    res.sendFile('index.html', {root: __dirname});
+httpServer.listen(8080, () => {
+    console.log('SERVER ON en http://localhost:8080');
 });
 
-httpServer.listen(3000, () => console.log('SERVER ON'));
+const messages = [
+    { author: "Juan", text: 'Hola que tal?'},
+    { author: "Pedro", text: 'Muy y vos?'},
+    { author: "Ana", text: 'Genial'}
+];
 
 io.on('connection', (socket) => {
-    console.log('Logged in user');
-    socket.emit('my message', 'Hi from the server');
+    console.log('Connected user');
+    socket.emit('messages', messages);
 
-    socket.on('notification', info => {
-        console.log(info);
+    socket.on('new-message', data => {
+        messages.push(data);
+        io.sockets.emit('messages', messages);
     })
-
-    socket.on('message', data => {
-        io.sockets.emit('my message', data);
-    })
-});
+})
