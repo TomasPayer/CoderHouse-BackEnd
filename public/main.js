@@ -1,6 +1,7 @@
 //Client view
 const socket = io.connect();
 
+
 function render(data) {
     const html = data.map((elem, index) => {
         return(`<div>
@@ -13,10 +14,12 @@ function render(data) {
     
 }
 
+
 function addMessage(e) {
     const mensaje = {
         author: document.getElementById('username').value,
-        text: document.getElementById('texto').value
+        text: document.getElementById('texto').value,
+
     };
     
     socket.emit('new-message', mensaje);
