@@ -1,25 +1,25 @@
 const express = require('express');
 const { Router } = express;
-const playerRouter = Router();
+const productRouter = Router();
 
-const { PlayerContainer } = require('../models/PlayerContainer');
-let playerContainer = new PlayerContainer();
+const { ProductContainer } = require('../models/ProductContainer');
+let productContainer = new ProductContainer();
 
-playerRouter.get('/', (req, res) => {
-    let players = playerContainer.getAll();
+productRouter.get('/', (req, res) => {
+    let products = productContainer.getAll();
 
-    res.json({players: players});
+    res.json({products: products});
 });
 
-playerRouter.post('/', (req, res) => {
-    let player = req.body;
+productRouter.post('/', (req, res) => {
+    let product = req.body;
 
-    if (player && player.name && player.number && player.age) {
-        player = playerContainer.save(player.name, player.number, player.age);
-        res.json({result: 'player saved', player: player});
+    if (product && product.name && product.number && product.age) {
+        product = ProductContainer.save(product.name, product.number, product.age);
+        res.json({result: 'product saved', product: product});
     } else {
-        res.json({result: 'player cannot saved'});
+        res.json({result: 'product cannot saved'});
     }
 });
 
-module.exports = playerRouter;
+module.exports = productRouter;

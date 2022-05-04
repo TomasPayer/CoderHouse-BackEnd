@@ -1,58 +1,58 @@
 const { Container } = require('./Container');
 
-class TeamContainer extends Container {
+class CartContainer extends Container {
     constructor() {
-        super('./src/data/teams.json');
-        let teams = this.getAll();
-        this.id = (teams.length > 0) ? teams.length + 1 : 1;
+        super('./src/data/cart.json');
+        let products = this.getAll();
+        this.id = (products.length > 0) ? products.length + 1 : 1;
     }
 
     save(name, description) {
-        let teams = this.getAll();
-        let team = {id:this.id, name: name, description: description, players: []}
-        teams.push(team);
-        this.saveInFile(teams);
+        let products = this.getAll();
+        let product = {id:this.id, name: name, description: description, products: []}
+        products.push(product);
+        this.saveInFile(products);
         this.id++;
 
-        return team;
+        return product;
     }
 
     getAll() {
-        let teams = this.getContentFile();
+        let products = this.getContentFile();
 
-        return teams;
+        return products;
     }
 
     getById(id) {
-        let teams = this.getAll();
-        let team = null;
+        let products = this.getAll();
+        let product = null;
 
-        if(teams.length > 0) {
-            let element = teams.find(elem => elem.id == id);
+        if(products.length > 0) {
+            let element = products.find(elem => elem.id == id);
             if(element) {
-                team = element;
+                product = element;
             }
         }
 
-        return team;
+        return product;
     }
 
-    addPlayerToTeam(teamId, player) {
-        let teams = this.getAll();
-        let team = null;
+    addProductToCart(productId, product) {
+        let products = this.getAll();
+        product = null;
 
-        if(teams.length > 0) {
-            let element = teams.find(elem => elem.id == teamId);
+        if(products.length > 0) {
+            let element = products.find(elem => elem.id == productId);
             if(element) {
                 element.players.push(player);
-                team = element;
+                product = element;
             }
 
-            this.saveInFile(teams);
+            this.saveInFile(products);
         }
 
         return team;
     }
 }
 
-module.exports = { TeamContainer }
+module.exports = { CartContainer }

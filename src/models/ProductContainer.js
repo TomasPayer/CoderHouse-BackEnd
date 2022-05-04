@@ -10,7 +10,7 @@ class ProductContainer extends Container {
     save(name, number, age) {
         let product = this.getAll();
         let products = {id:this.id, name: name, number: number, age: age}
-        prodcuts.push(product);
+        products.push(product);
         this.saveInFile(products);
         this.id++;
     }
@@ -36,4 +36,4 @@ class ProductContainer extends Container {
     }
 }
 
-module.exports = { PlayerContainer }
+module.exports = { ProductContainer }

@@ -1,6 +1,6 @@
 const express = require('express');
 const { Router } = express;
-const teamRouter = Router();
+const cartRouter = Router();
 
 const { ProductContainer } = require('../models/ProductContainer');
 const { CartContainer } = require('../models/CartContainer');
@@ -8,34 +8,34 @@ const { CartContainer } = require('../models/CartContainer');
 let productContainer = new ProductContainer();
 let cartContainer = new CartContainer();
 
-teamRouter.get('/', (req, res) => {
-    let teams = teamContainer.getAll();
+cartRouter.get('/', (req, res) => {
+    let products = cartContainer.getAll();
 
-    res.json({teams: teams});
+    res.json({products: products});
 });
 
-teamRouter.post('/', (req, res) => {
-    let team = req.body;
+cartRouter.post('/', (req, res) => {
+    let product = req.body;
 
-    if (team && team.name && team.description) {
-        team = teamContainer.save(team.name, team.description);
-        res.json({result: 'team saved', team: team});
+    if (product && product.name && product.description) {
+        product = cartContainer.save(product.name, product.description);
+        res.json({result: 'product saved', product: product});
     } else {
-        res.json({result: 'team cannot saved'});
+        res.json({result: 'product cannot saved'});
     }
 });
 
-teamRouter.post('/:id/players', (req, res) => {
-    let teamId = req.params.id;
-    let player = playerContainer.getById(req.body.id);
+cartRouter.post('/:id/products', (req, res) => {
+    let productId = req.params.id;
+    let product = CartContainer.getById(req.body.id);
 
-    if (teamId && player) {
-        let team = teamContainer.addPlayerToTeam(teamId, player);
+    if (productId && product) {
+        let product = cartContainer.addProductToCart(productId, product);
         
-        res.json({result: 'player added to team', team: team});
+        res.json({result: 'product added to cart', product: product});
     } else {
         res.json({result: 'player cannot be added'});
     }
 });
 
-module.exports = teamRouter;
+module.exports = cartRouter;

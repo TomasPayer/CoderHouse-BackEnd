@@ -10,7 +10,7 @@ class Container {
     }
 
     getContentFile() {
-        let content = [];
+        let content = [{nombre:'heladera', precio:100, id:5}, {nombre:'heladera2', precio:102, id:6}];
 
         try {
             let file = fs.readFileSync(this.fileName, 'utf-8');
