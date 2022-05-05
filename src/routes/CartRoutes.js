@@ -38,4 +38,13 @@ cartRouter.post('/:id/products', (req, res) => {
     }
 });
 
+cartRouter.delete('/:id', (req, res) => {
+    const {id} = req.params;
+    const wasDeleted = cartContainer.deleteById(id);
+    
+    wasDeleted 
+        ? res.status(200).json({"success": "cart successfully removed"})
+        : res.status(404).json({"error": "cart not found"})
+});
+
 module.exports = cartRouter;

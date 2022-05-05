@@ -1,19 +1,9 @@
 const express = require('express');
-const multer = require('multer');
+
 const app = express();
 const productRouter = require('./src/routes/ProductRoutes');
 const cartRouter = require('./src/routes/CartRoutes');
 
-let storage = multer.diskStorage({
-    destination: function (req, res, cb) {
-      cb(null, "uploads");
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + "-" + Date.now());
-    },
-  });
-  
-  const upload = multer({ storage: storage });
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
