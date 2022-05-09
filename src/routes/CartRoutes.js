@@ -27,14 +27,14 @@ cartRouter.post('/', (req, res) => {
 
 cartRouter.post('/:id/products', (req, res) => {
     let productId = req.params.id;
-    let product = CartContainer.getById(req.body.id);
+    let product = cartContainer.getById(req.body.id);
 
     if (productId && product) {
         let product = cartContainer.addProductToCart(productId, product);
         
         res.json({result: 'product added to cart', product: product});
     } else {
-        res.json({result: 'player cannot be added'});
+        res.json({result: 'product cannot be added'});
     }
 });
 
