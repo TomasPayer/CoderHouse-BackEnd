@@ -2,41 +2,41 @@
     {
     "id": 1,
     "timestamp": 1648319850314,
-    "title": "Product 1",
-    "price": 10,
+    "name": "Product 1",
     "description":"Some description for product 1",
     "code": "XP-1",
     "image": "someUrlProduct1.com",
+    "price": 10,
     "stock": 100
 },
 {
     "id": 2,
     "timestamp": 1648319850314,
-    "title": "Product 2",
-    "price": 20,
+    "name": "Product 2",
     "description":"Some description for product 2",
     "code": "XP-2",
     "image": "someUrlProduct2.com",
-    "stock": 200
+    "price": 20,
+    "stock": 150
 },
 {
     "id": 3,
     "timestamp": 1648319850314,
-    "title": "Product 31",
-    "price": 30,
+    "name": "Product 3",
     "description":"Some description for product 3",
     "code": "XP-3",
     "image": "someUrlProduct3.com",
+    "price": 30,
     "stock": 300
 },
 {
     "id": 4,
     "timestamp": 1648319850314,
-    "title": "Product 4",
-    "price": 40,
+    "name": "Product 4",
     "description":"Some description for product 4",
     "code": "XP-4",
     "image": "someUrlProduct4.com",
+    "price": 40,
     "stock": 400
 }
 ]

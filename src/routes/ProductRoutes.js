@@ -25,8 +25,8 @@ productRouter.get('/:id', (req, res) => {
 productRouter.post('/', (req, res) => {
     let product = req.body;
 
-    if (product && product.name && product.number && product.age) {
-        product = productContainer.save(product.name, product.number, product.age);
+    if (product && product.id && product.timestamp && product.name && product.description) {
+        product = productContainer.save(product.id, product.timestamp, product.name, roduct.description);
         res.json({result: 'product saved', product: products});
     } else {
         res.json({result: 'product cannot saved'});
