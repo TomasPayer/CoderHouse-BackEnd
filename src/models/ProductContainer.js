@@ -7,12 +7,13 @@ class ProductContainer extends Container {
         this.id = (products.length > 0) ? products.length + 1 : 1;
     }
 
-    save(name, number, age) {
-        let product = this.getAll();
-        let products = {id:this.id, name: name, number: number, age: age}
+    save(id, timestamp, name, description, code, image, price, stock) {
+        let products = this.getAll();
+        let product = {id:this.id, id: id, timestamp: timestamp, name: name, description: description, code: code, image: image, price: price, stock: stock}
         products.push(product);
         this.saveInFile(products);
         this.id++;
+
     }
 
     getAll() {
