@@ -3,55 +3,71 @@ const { Container } = require('./Container');
 class CartContainer extends Container {
     constructor() {
         super('./src/data/cart.json');
-        let products = this.getAll();
-        this.id = (products.length > 0) ? products.length + 1 : 1;
+        let carts = this.getAll();
+        this.id = (carts.length > 0) ? carts.length + 1 : 1;
     }
 
     save(name, description) {
-        let products = this.getAll();
-        let product = {id:this.id, name: name, description: description, products: []}
-        products.push(product);
-        this.saveInFile(products);
+        let carts = this.getAll();
+        let cart = { id: this.id, timestamp: Date.now(), name: name, description: description, products: []}
+        carts.push(cart);
+        this.saveInFile(carts);
         this.id++;
 
-        return product;
+        return cart;
     }
 
     getAll() {
-        let products = this.getContentFile();
+        let carts = this.getContentFile();
+        return carts;
+    }
 
+    addProductsToCart(id, addedProducts) {
+        let carts = this.getAll();
+        let cartUpdated;
+        if (carts.length) {
+            cartUpdated = carts.find(elem => elem.id == id);
+            if (cartUpdated) {
+                cartUpdated.products = cartUpdated.products.concat(addedProducts);
+            }
+            this.saveInFile(carts);
+        }
+        return cartUpdated;
+    }
+
+    getAllProductsByCartId(id) {
+        let carts = this.getAll();
+        let cartExists = carts.find(elem => elem.id == id);
+        let products = [];
+        if (!cartExists) {
+            return false;
+        } else {
+            products = cartExists.products;
+        }
         return products;
     }
 
-    getById(id) {
-        let products = this.getAll();
-        let product = null;
-
-        if(products.length > 0) {
-            let element = products.find(elem => elem.id == id);
-            if(element) {
-                product = element;
-            }
+    deleteById(id) {
+        let carts = this.getAll();
+        let cartExists = carts.find(elem => elem.id == id);
+        if (cartExists) {
+            // Remove cart
+            let updatedCarts = carts.filter(elem => elem.id != id);
+            this.saveInFile(updatedCarts);
         }
-
-        return product;
+        return cartExists;
     }
-
-    addProductToCart(productId, product) {
-        let products = this.getAll();
-        product = null;
-
-        if(products.length > 0) {
-            let element = products.find(elem => elem.id == productId);
-            if(element) {
-                element.players.push(player);
-                product = element;
-            }
-
-            this.saveInFile(products);
+    
+    deleteProductFromCart(id, productId) {
+        let carts = this.getAll();
+        let cartExists = carts.find(elem => elem.id == id);
+        if (cartExists) {
+            cartExists.products = cartExists.products.filter(product => product.id !== productId);
+            this.saveInFile(carts);
+            return true;
+        } else {
+            return false;
         }
-
-        return team;
     }
 }
 
