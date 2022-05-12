@@ -5,7 +5,7 @@ const productRouter = Router();
 const { ProductContainer } = require('../models/ProductContainer');
 let productContainer = new ProductContainer();
 
-const ISADMIN = TRUE;
+const ISADMIN = true;
 
 // GET api/products
 productRouter.get('/', (req, res) => {
